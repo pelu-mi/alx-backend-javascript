@@ -1,8 +1,13 @@
-export default function handleResponseFromAPI(promise) {
-  const myPromise = promise
-    .then(() => ({ status: 200, body: 'Success' }))
-    .catch(() => (new Error()))
-    .finally(() => { console.log('Got a response from the API'); });
-  // Return Promise
-  return myPromise;
+/* eslint-disable prefer-destructuring */
+import { uploadPhoto, createUser } from './utils';
+
+export default function handleProfileSignup() {
+  Promise.all([uploadPhoto(), createUser()])
+    .then((values) => {
+      const body = values[0].body;
+      const first = values[1].firstName;
+      const last = values[1].lastName;
+      console.log(`${body} ${first} ${last}`);
+    })
+    .catch(() => { console.log('Signup system offline'); });
 }
