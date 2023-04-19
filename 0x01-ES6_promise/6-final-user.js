@@ -10,16 +10,13 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise.allSettled([signUp, upload])
     .then((values) => {
       const arr = [];
-      let value = '';
-      for (const item in values) {
-        const status = item.state;
-        if (status === 'rejected') {
-          value = item.reason;
+      values.forEach((item) => {
+        if (item.status === 'fulfilled') {
+          arr.push({ status: item.status, value: item.value });
         } else {
-          value = item.value;
+          arr.push({ status: item.status, value: `${item.reason}` });
         }
-        arr.push({ status, value });
-      }
+      });
       return arr;
     });
 }
