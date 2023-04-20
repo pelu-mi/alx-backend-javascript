@@ -10,7 +10,4 @@ export default class Building {
   get sqft() {
     return this._sqft;
   }
-
-  // Class method
-  // evacuationWarningMessage() {}
 }
