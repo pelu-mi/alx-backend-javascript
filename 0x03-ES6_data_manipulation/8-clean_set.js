@@ -3,8 +3,8 @@ export default function cleanSet(set, startString) {
     return '';
   }
   const text = [];
-  for (const item of set) {
-    if (item.startsWith(startString)) {
+  for (const item of set.values()) {
+    if (typeof item === 'string' && item.startsWith(startString)) {
       text.push(item.slice(startString.length));
     }
   }
