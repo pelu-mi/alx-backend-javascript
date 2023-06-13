@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = function countStudents(path) {
   try {
-    const data = fs.readFileSync(path, 'utf-8').trim();
+    const data = fs.readFileSync(path, 'utf-8').toString().trim();
     const dataArray = data.split('\n').slice(1);
     for (const row of dataArray) {
       if (row === '') {
