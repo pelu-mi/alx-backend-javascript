@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = function countStudents(path) {
   try {
-    /*
+    // Testing original theory
     const data = fs.readFileSync(path, 'utf-8').toString('utf-8').trim();
     const dataArray = data.split('\n').slice(1);
     console.log(`Number of students: ${dataArray.length}`);
@@ -19,18 +19,21 @@ module.exports = function countStudents(path) {
     }
 
     // Print out all the first names per field using the format
+    let output_str = "";
     for (const [field, fVal] of Object.entries(fields)) {
-      process.stdout.write(`Number of students in ${field}: ${fVal}. List: `);
+      output_str += `Number of students in ${field}: ${fVal}. List: `;
       let flag = 0;
       for (const record of dataArray) {
         if (record.split(',')[3] === field) {
-          if (flag === 1) { process.stdout.write(', '); }
-          process.stdout.write(`${record.split(',')[0]}`);
+          if (flag === 1) { output_str += ', '; }
+          output_str += `${record.split(',')[0]}`;
           flag = 1;
         }
       }
-      process.stdout.write('\n');
-    }*/
+      output_str += '\n';
+    }
+    console.log(output_str.substring(0, output_str.length - 1));
+    /*/ Working theory
     const dataPath = path
     const fileLines = fs
       .readFileSync(dataPath, 'utf-8')
@@ -44,7 +47,7 @@ module.exports = function countStudents(path) {
     for (const line of fileLines.slice(1)) {
       const studentRecord = line.split(',');
       const studentPropValues = studentRecord.slice(0, studentRecord.length - 1);
-      const field = studentRecord[studentRecord.length - 1];
+      const field = studentRecord[3];
       if (!Object.keys(studentGroups).includes(field)) {
         studentGroups[field] = [];
       }
@@ -60,7 +63,7 @@ module.exports = function countStudents(path) {
     for (const [field, group] of Object.entries(studentGroups)) {
       const studentNames = group.map((student) => student.firstname).join(', ');
       console.log(`Number of students in ${field}: ${group.length}. List: ${studentNames}`);
-    }
+    }*/
   } catch (err) {
     console.log(err);
     // throw new Error('Cannot load the database');
