@@ -2,10 +2,8 @@
 const fs = require('fs');
 
 module.exports = function countStudents(path) {
-  fs.readFileSync(path, 'utf-8', (err, data) => {
-    if (err) {
-      throw new Error('Cannot load the database');
-    }
+  try {
+    const data = fs.readFileSync(path, 'utf-8');
     const dataArray = data.split('\n').slice(1, 11);
     console.log(`Number of students: ${dataArray.length}`);
 
@@ -22,7 +20,7 @@ module.exports = function countStudents(path) {
     // Print out all the first names per field using the format
     for (const [field, fVal] of Object.entries(fields)) {
       process.stdout.write(`Number of students in ${field}: ${fVal}. List: `);
-      const flag = 0;
+      let flag = 0;
       for (const record of dataArray) {
         if (record.split(',')[3] === field) {
           if (flag === 1) { process.stdout.write(', '); }
@@ -32,5 +30,7 @@ module.exports = function countStudents(path) {
       }
       process.stdout.write('\n');
     }
-  });
+  } catch (err) {
+    throw new Error('Cannot load the database');
+  }
 };
