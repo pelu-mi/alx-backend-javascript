@@ -5,7 +5,7 @@ const countStudents = (path) => new Promise((resolve, reject) => {
   fs.readFile(path, 'utf-8', (err, data) => {
     if (err) { throw new Error('Cannot load the database'); }
     if (!(data)) { return; }
-    const dataArray = data.split('\n').slice(1, 11);
+    const dataArray = data.trim().split('\n').slice(1);
     console.log(`Number of students: ${dataArray.length}`);
 
     // Find all the different fields in the database and count them
@@ -32,6 +32,6 @@ const countStudents = (path) => new Promise((resolve, reject) => {
       process.stdout.write('\n');
     }
   });
-};
+});
 
-module.exports = countStudents
+module.exports = countStudents;
