@@ -1,15 +1,11 @@
 /* eslint-disable no-const-assign */
 const fs = require('fs');
 
-module.exports = function countStudents(path) {
-  try {
-    const data = fs.readFileSync(path, 'utf-8').trim();
-    const dataArray = data.split('\n').slice(1);
-    for (const row of dataArray) {
-      if (row === '') {
-        console.log(row);
-      }
-    }
+const countStudents = (path) => new Promise((resolve, reject) => {
+  fs.readFile(path, 'utf-8', (err, data) => {
+    if (err) { throw new Error('Cannot load the database'); }
+    if (!(data)) { return; }
+    const dataArray = data.split('\n').slice(1, 11);
     console.log(`Number of students: ${dataArray.length}`);
 
     // Find all the different fields in the database and count them
@@ -35,7 +31,7 @@ module.exports = function countStudents(path) {
       }
       process.stdout.write('\n');
     }
-  } catch (err) {
-    throw new Error('Cannot load the database');
-  }
+  });
 };
+
+module.exports = countStudents
