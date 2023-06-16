@@ -29,13 +29,15 @@ describe('API Testing: Cart page', () => {
   it('GET /cart/:id - negative number returns 404 status code', (done) => {
     request.get(`${url}/cart/-50`, (err, res, body) => {
       expect(res.statusCode).to.be.equal(404);
+      expect(body).to.contain('Cannot GET /cart/-50');
       done();
     });
   });
 
   it('GET /cart/:id - alphanumeric value returns 404 status code', (done) => {
-    request.get(`${url}/cart/-da5t0`, (err, res, body) => {
+    request.get(`${url}/cart/da5t0`, (err, res, body) => {
       expect(res.statusCode).to.be.equal(404);
+      expect(body).to.contain('Cannot GET /cart/da5t0');
       done();
     });
   });
