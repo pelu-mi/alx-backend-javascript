@@ -21,7 +21,7 @@ describe('API Testing: Cart page', () => {
   it('GET /cart/:id - has correct status code and result', (done) => {
     request.get(`${url}/cart/50`, (err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body).to.be.equal('Payment methods for cart :50');
+      expect(body).to.be.equal('Payment methods for cart 50');
       done();
     });
   });
