@@ -18,7 +18,7 @@ app.get('/available_payments', (req, res) => {
   res.json({ payment_methods: { credit_cards: true, paypal: false } });
 });
 
-app.get('', (req, res) => {
+app.post('/login', (req, res) => {
   let username = '';
   if (req.body) {
     username = req.body.userName;
