@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const getPaymentTokenFromAPI = require('./6-payment_token');
 
 describe('getPaymentTokenFromAPI', () => {
-  it('should return a promise', (done) => {
+  it('should return a promise with data', (done) => {
     getPaymentTokenFromAPI(true)
       .then((data) => {
         expect(data).to.be.an('object');
